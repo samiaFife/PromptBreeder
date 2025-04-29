@@ -54,7 +54,5 @@ mutation_prompts = [
     "Look carefully to see what you did wrong, how could you fix the problem?",
     "CORRECTION =",
     "Does the above text make sense? What seems wrong with it? Here is an attempt to fix it:",
-    "The above working out has some errors, here is a version with the errors fixed."
+    "The above working out has some errors, here is a version with the errors fixed.",
 ]
-
-

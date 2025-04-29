@@ -1,11 +1,13 @@
 import json
-import re
 import os
+import re
+
 
 def read_jsonl(path: str):
     with open(path) as fh:
         return [json.loads(line) for line in fh.readlines() if line]
-    
+
+
 def get_examples(split):
     path = os.path.join("data/", f"{split}.jsonl")
     examples = read_jsonl(path)
@@ -30,7 +32,8 @@ def gsm_extract_answer(completion):
         return match_str
     else:
         return INVALID_ANS
-    
+
+
 def gsm_is_correct(model_completion, gt_example):
     gt_answer = gsm_extract_answer(gt_example["answer"])
     assert gt_answer != INVALID_ANS

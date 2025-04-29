@@ -1,4 +1,4 @@
-# from https://arxiv.org/pdf/2309.16797.pdf [pg. 21] 
+# from https://arxiv.org/pdf/2309.16797.pdf [pg. 21]
 # I copied and ran it through ChatGPT to format, if there is any deviation open an issue please.
 
 thinking_styles = [
@@ -40,5 +40,5 @@ thinking_styles = [
     "What is the best way to modify this current best solution, given what you know about these kinds of problem specification?",
     "Ignoring the current best solution, create an entirely new solution to the problem.",
     "Let's think step by step.",
-    "Let's make a step by step plan and implement it with good notion and explanation."
+    "Let's make a step by step plan and implement it with good notion and explanation.",
 ]
