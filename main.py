@@ -27,6 +27,7 @@ parser.add_argument("-n", "--simulations", type=int, default=10)
 parser.add_argument("--task-name", default="sst-2")
 parser.add_argument("--bench-name", default="")
 parser.add_argument("--batch-size", type=int, default=16)
+parser.add_argument("--meta-dir")
 parser.add_argument("-p", "--problem", default="Solve the math word problem, giving your answer as an arabic numeral.")
 
 args = vars(parser.parse_args())
