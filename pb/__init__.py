@@ -47,7 +47,12 @@ def init_run(population: Population, loader: ModelLoader, num_evals: int):
         f"{unit.T} {unit.M} INSTRUCTION: {population.problem_description} INSTRUCTION MUTANT = "
         for unit in population.units
     ]
-    results = loader.model.generate(prompts, loader.model_generate_args)  # ! температура
+
+    print("prompts for initializing a population:")
+    for prompt in prompts:
+        print(prompt)
+
+    results = loader.generate(prompts)
 
     end_time = time.time()
 
@@ -56,6 +61,7 @@ def init_run(population: Population, loader: ModelLoader, num_evals: int):
     assert len(results) == population.size, "size of google response to population is mismatched"
     for i, item in enumerate(results):
         population.units[i].P = item.outputs[0].text
+        print(f"{i}th prompt: [{item.outputs[0].text}]")
 
     _evaluate_fitness(population, loader)
 

@@ -8,7 +8,7 @@ import numpy as np
 import ray
 import torch
 from transformers import AutoTokenizer
-from vllm import LLM
+from vllm import LLM, SamplingParams
 
 from src.evaluation.evaluator import GenerationEvaluator, TextClassificationEvaluator
 from src.utils.data import INNER_GENERATION_TASKS
@@ -115,7 +115,7 @@ class ModelLoader:
 
     @property
     def model_generate_args(self):
-        return {"max_tokens": self._max_new_tokens, "stop_token_ids": self._terminators, "temperature": 0.75}
+        return {"max_tokens": self._max_new_tokens, "stop_token_ids": self._terminators, "temperature": 0}
 
     @property
     def device(self):
@@ -168,15 +168,20 @@ class ModelLoader:
             model=self.model,
             tokenizer=self.tokenizer,
             eval_ds=self.load_data(candidate, split),
-            batch_size=self.batch_size,
+            batch_size=self._batch_size,
             model_generate_args=self.model_generate_args,
         )
 
-    def generate(self, prompt):
-        return self.model.generate(prompt, self.model_generate_args)
+    def generate(self, prompts):
+        if isinstance(prompts, str):
+            prompts = [prompts]
+        return self.model.generate([prompts], sampling_params=SamplingParams(**self.model_generate_args))
 
     def get_sample(self):
-        return self.load_data(sample=1)
+        sample = self.load_data(sample=1, prompt=None)
+        input_ids, _, label_id = sample
+        question = self._tokenizer.decode(input_ids, skip_special_tokens=True)
+        return {"question": question, "label": label_id}
 
     def destroy(self):
         from vllm.distributed.parallel_state import (

@@ -4,7 +4,6 @@ import os
 import sys
 
 from dotenv import load_dotenv
-from pb import create_population, init_run, run_for_n
 from pb.mutation_prompts import mutation_prompts
 from pb.thinking_styles import thinking_styles
 from rich import print
@@ -13,6 +12,7 @@ project_root = os.path.abspath(os.path.join(os.getcwd(), "../../../"))
 sys.path.append(project_root)
 
 from pb.utils.model_loader import ModelLoader  # noqa 402
+from pb import create_population, init_run, run_for_n  # noqa 402
 
 load_dotenv()  # load environment variables
 
@@ -28,9 +28,9 @@ parser.add_argument("--task-name", default="sst-2")
 parser.add_argument("--bench-name", default="")
 parser.add_argument("--batch-size", type=int, default=16)
 parser.add_argument("--meta-dir")
-parser.add_argument("-p", "--problem", default="Solve the math word problem, giving your answer as an arabic numeral.")
+parser.add_argument("--meta-name")
 
-args = vars(parser.parse_args())
+args = parser.parse_args()
 
 if args.bench_name != "":
     loader = ModelLoader(task_name=args.task_name, bench_name=args.bench_name, batch_size=args.batch_size)
@@ -40,15 +40,15 @@ loader.seed_everything()
 logger.info("Model loaded")
 
 num_samples = 100
-total_evaluations = args["num_mutation_prompts"] * args["num_thinking_styles"] * num_samples
+total_evaluations = args.num_mutation_prompts * args.num_thinking_styles * num_samples
 
 # // # set num_workers to total_evaluations so we always have a thread
 # // co = cohere.Client(
 # //     api_key=os.environ["COHERE_API_KEY"], num_workers=total_evaluations, max_retries=5, timeout=30
 # // )  # override the 2 min timeout with 30s.
 
-tp_set = mutation_prompts[: int(args["num_mutation_prompts"])]
-mutator_set = thinking_styles[: int(args["num_thinking_styles"])]
+tp_set = mutation_prompts[: int(args.num_mutation_prompts)]
+mutator_set = thinking_styles[: int(args.num_thinking_styles)]
 
 logger.info(f"You are prompt-optimizing for the problem: {loader.base_prompt}")
 
@@ -59,10 +59,15 @@ logger.info("Generating the initial prompts...")
 init_run(p, loader, num_samples)
 
 logger.info("Starting the genetic algorithm...")
-run_for_n(n=int(args["simulations"]), population=p, model=loader, num_evals=num_samples)
+run_for_n(n=int(args.simulations), population=p, loader=loader)
 
 print("%" * 80)
 print("done processing! final gen:")
 print(p.units)
+
+meta_path = os.path.join(args.meta_dir, args.meta_name)
+meta_file = open(meta_path, "w+")
+
+meta_file.write(f"initital prompt: {loader.base_prompt}\nfinal gen:\n{p.units}\n")
 
 loader.destroy()
