@@ -2,10 +2,12 @@ import logging
 import time
 from typing import List
 
+from vllm import SamplingParams
+
 from pb import gsm
+from pb.utils.model_loader import ModelLoader
 from pb.mutation_operators import mutate
 from pb.types import EvolutionUnit, Population
-from pb.utils.model_loader import ModelLoader
 from rich import print
 
 logger = logging.getLogger(__name__)
@@ -52,7 +54,7 @@ def init_run(population: Population, loader: ModelLoader, num_evals: int):
     for prompt in prompts:
         print(prompt)
 
-    results = loader.generate(prompts)
+    results = loader.model.generate(prompts, sampling_params=SamplingParams(temperature=0.7, max_tokens=100))
 
     end_time = time.time()
 

@@ -26,7 +26,7 @@ class ModelLoader:
             cls._instance._kwargs = kwargs
         return cls._instance
 
-    def __init__(self, task_name: str = None, bench_name=None, batch_size=None):
+    def __init__(self, task_name: str, bench_name=None, batch_size=16):
         if not self._initialized:
             self.task_name = task_name
             self.bench_name = bench_name
@@ -121,11 +121,11 @@ class ModelLoader:
     def device(self):
         return self._device
 
-    def load_data(self, prompt, split="train", sample=100):
+    def load_data(self, prompt, split="train", full=False, sample=100):
         return load_dataset(
             self.task_name,
             tokenizer=self._tokenizer,
-            sample=sample if split == "train" else None,
+            sample=sample if not full else None,
             split=split,
             prompt=prompt,
             device=self._device,
@@ -142,6 +142,10 @@ class ModelLoader:
     @property
     def evaluator(self):
         return self._evaluator
+
+    @property
+    def batch_size(self):
+        return self._batch_size
 
     def seed_everything(self, seed: int = 42):
         random.seed(seed)
@@ -163,25 +167,32 @@ class ModelLoader:
                 f"GPU {i}: Used = {used/1024**3:.2f} GB | Free = {free/1024**3:.2f} GB | Total = {total/1024**3:.2f} GB"
             )
 
-    def get_metrics(self, candidate, split="train"):
+    def get_metrics(self, candidate, split="train", full=False):
         return self.evaluator.evaluate_vllm(
             model=self.model,
             tokenizer=self.tokenizer,
-            eval_ds=self.load_data(candidate, split),
-            batch_size=self._batch_size,
+            eval_ds=self.load_data(candidate, split, full),
+            batch_size=self.batch_size,
             model_generate_args=self.model_generate_args,
         )
 
     def generate(self, prompts):
         if isinstance(prompts, str):
             prompts = [prompts]
-        return self.model.generate([prompts], sampling_params=SamplingParams(**self.model_generate_args))
+        return self.model.generate(prompts, sampling_params=SamplingParams(**self.model_generate_args))
 
     def get_sample(self):
         sample = self.load_data(sample=1, prompt=None)
-        input_ids, _, label_id = sample
-        question = self._tokenizer.decode(input_ids, skip_special_tokens=True)
-        return {"question": question, "label": label_id}
+        input_ids, _, label_id = sample[0]
+        input = self._tokenizer.decode(input_ids, skip_special_tokens=True)
+        question_start = input[input.rfind("The input:\n") + len("The input:\n") :]
+        question = question_start[: question_start.find("\n")]
+        label2id = sample.get_labels_mapping()
+        if len(label2id) != 0:
+            answer = {v: k for k, v in label2id.items()}[label_id.item()]
+        else:
+            answer = self._tokenizer.decode(label_id, skip_special_tokens=True)
+        return {"question": question, "answer": answer}
 
     def destroy(self):
         from vllm.distributed.parallel_state import (
@@ -191,7 +202,8 @@ class ModelLoader:
 
         destroy_model_parallel()
         destroy_distributed_environment()
-        del self._model.llm_engine.model_executor
+        if hasattr(self._model.llm_engine, "model_executor"):
+            del self._model.llm_engine.model_executor
         del self._model
         with contextlib.suppress(AssertionError):
             torch.distributed.destroy_process_group()

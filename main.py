@@ -1,18 +1,11 @@
 import argparse
+import json
 import logging
 import os
 import sys
 
 from dotenv import load_dotenv
-from pb.mutation_prompts import mutation_prompts
-from pb.thinking_styles import thinking_styles
 from rich import print
-
-project_root = os.path.abspath(os.path.join(os.getcwd(), "../../../"))
-sys.path.append(project_root)
-
-from pb.utils.model_loader import ModelLoader  # noqa 402
-from pb import create_population, init_run, run_for_n  # noqa 402
 
 load_dotenv()  # load environment variables
 
@@ -29,8 +22,23 @@ parser.add_argument("--bench-name", default="")
 parser.add_argument("--batch-size", type=int, default=16)
 parser.add_argument("--meta-dir")
 parser.add_argument("--meta-name")
+parser.add_argument("--meta-dir-test", help="Directory for test results in JSON format")
 
 args = parser.parse_args()
+
+logger.info(f"args: {args}")
+
+meta_path = os.path.join(args.meta_dir, args.meta_name)
+meta_file = open(meta_path, "w+")
+meta_test_path = open(args.meta_dir_test, "a")
+
+project_root = os.path.abspath(os.path.join(os.getcwd(), "../../../"))
+sys.path.append(project_root)
+
+from pb.utils.model_loader import ModelLoader  # noqa 402
+from pb.mutation_prompts import mutation_prompts  # noqa 402
+from pb.thinking_styles import thinking_styles  # noqa 402
+from pb import create_population, init_run, run_for_n  # noqa 402
 
 if args.bench_name != "":
     loader = ModelLoader(task_name=args.task_name, bench_name=args.bench_name, batch_size=args.batch_size)
@@ -65,9 +73,17 @@ print("%" * 80)
 print("done processing! final gen:")
 print(p.units)
 
-meta_path = os.path.join(args.meta_dir, args.meta_name)
-meta_file = open(meta_path, "w+")
+max_fitness = max(unit.fitness for unit in p.units)
+fittest = [(unit.fitness, unit.P) for unit in p.units if unit.fitness == max_fitness]
 
-meta_file.write(f"initital prompt: {loader.base_prompt}\nfinal gen:\n{p.units}\n")
+meta_file.write(f"initital prompt: {loader.base_prompt}\nthe fittest:\n" + "-" * 80 + "\n")
+for fitness, prompt in fittest:
+    meta_file.write(f"fitness: {fitness}\n")
+    meta_file.write(f"prompt: {prompt}\n")
+    meta_file.write("-" * 80 + "\n")
+
+test_score = loader.get_metrics(candidate=fittest[0][1], split="test", full=False)
+result = {"task_name": args.task_name, "score": test_score, "prompt": fittest[0][1]}
+meta_test_path.write(json.dumps(result) + "\n")
 
 loader.destroy()

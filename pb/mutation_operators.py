@@ -9,8 +9,6 @@ from pb.thinking_styles import thinking_styles
 from pb.types import EvolutionUnit, Population
 from rich import print
 
-from src.solutions.PromptBreeder.pb.utils.model_loader import ModelLoader
-
 load_dotenv()
 
 # need below for estimation_distribution_mutation, not currently using.
@@ -19,16 +17,14 @@ load_dotenv()
 
 
 # Direct Mutation mutators
-def zero_order_prompt_gen(
-    unit: EvolutionUnit, problem_description: str, loader: ModelLoader, **kwargs
-) -> EvolutionUnit:
+def zero_order_prompt_gen(unit: EvolutionUnit, problem_description: str, loader, **kwargs) -> EvolutionUnit:
     """Generates a new task-prompt P by concatenating the problem description D with the prompt
     'a list of 100 hints:'. New task-prompt P is the first generated hint.
 
     Returns:
         EvolutionUnit: the evolution unit to replace the loser unit.
     """
-    result = loader.generate(problem_description + " An ordered list of 100 hints: ")
+    result = loader.generate(problem_description + " An ordered list of 100 hints: ")[0]
     # search for the pattern "anything after 1. and before 2."
     pattern = r"1\.(.*?)2\."
     match = re.search(pattern, result.outputs[0].text, re.DOTALL)
@@ -41,13 +37,13 @@ def zero_order_prompt_gen(
     return unit
 
 
-def first_order_prompt_gen(unit: EvolutionUnit, loader: ModelLoader, **kwargs) -> EvolutionUnit:
+def first_order_prompt_gen(unit: EvolutionUnit, loader, **kwargs) -> EvolutionUnit:
     """Concatenate the mutation prompt M to the parent task-prompt P and pass it to the LLM to produce P'
 
     Returns:
         EvolutionUnit: the evolution unit to replace the loser unit.
     """
-    unit.P = loader.generate(unit.M + " " + unit.P).outputs[0].text
+    unit.P = loader.generate(unit.M + " " + unit.P)[0].outputs[0].text
     return unit
 
 
@@ -69,9 +65,7 @@ def estimation_distribution_mutation(
     pass
 
 
-def lineage_based_mutation(
-    unit: EvolutionUnit, elites: List[EvolutionUnit], loader: ModelLoader, **kwargs
-) -> EvolutionUnit:
+def lineage_based_mutation(unit: EvolutionUnit, elites: List[EvolutionUnit], loader, **kwargs) -> EvolutionUnit:
     """Using the stored history of best units, provide the LLM this list in chronological order to produce a novel prompt as continuation.
 
     Returns:
@@ -80,26 +74,24 @@ def lineage_based_mutation(
     HEADING = "GENOTYPES FOUND IN ASCENDING ORDER OF QUALITY \n "
     # made a choice not to format it with newlines, could change later.
     ITEMS = "\n".join(["{}. {}".format(i + 1, x.P) for i, x in enumerate(elites)])
-    unit.P = loader.generate(HEADING + ITEMS).outputs[0].text
+    unit.P = loader.generate(HEADING + ITEMS)[0].outputs[0].text
 
     return unit
 
 
 # Hypermutation
-def zero_order_hypermutation(
-    unit: EvolutionUnit, problem_description: str, loader: ModelLoader, **kwargs
-) -> EvolutionUnit:
+def zero_order_hypermutation(unit: EvolutionUnit, problem_description: str, loader, **kwargs) -> EvolutionUnit:
     """Concatenate the original problem_description to a randomly sampled thinking-style and feed it to the LLM to generate a new mutation-prompt.
 
     Returns:
         EvolutionUnit: the evolution unit to replace the loser unit.
     """
     RANDOM_THINKING_STYLE = random.sample(thinking_styles, 1)[0]
-    unit.M = loader.generate(problem_description + " " + RANDOM_THINKING_STYLE).outputs[0].text
+    unit.M = loader.generate(problem_description + " " + RANDOM_THINKING_STYLE)[0].outputs[0].text
     return unit
 
 
-def first_order_hypermutation(unit: EvolutionUnit, loader: ModelLoader, **kwargs) -> EvolutionUnit:
+def first_order_hypermutation(unit: EvolutionUnit, loader, **kwargs) -> EvolutionUnit:
     """Concatenate the hyper-mutation prompt "Please summarize and improve the following instruction:"
     to a mutation-prompt to that the LLM generates a new mutation-prompt. This new mutation-prompt is then
     instantly applied to the task-prompt of that unit.
@@ -108,13 +100,13 @@ def first_order_hypermutation(unit: EvolutionUnit, loader: ModelLoader, **kwargs
         EvolutionUnit: the evolution unit to replace the loser unit.
     """
     HYPER_MUTATION_PROMPT = "Please summarize and improve the following instruction: "
-    unit.M = loader.generate(HYPER_MUTATION_PROMPT + unit.M).outputs[0].text
-    unit.P = loader.generate(unit.M + " " + unit.P).outputs[0].text
+    unit.M = loader.generate(HYPER_MUTATION_PROMPT + unit.M)[0].outputs[0].text
+    unit.P = loader.generate(unit.M + " " + unit.P)[0].outputs[0].text
     return unit
 
 
 # Lamarckian Mutation
-def working_out_task_prompt(unit: EvolutionUnit, loader: ModelLoader, **kwargs) -> EvolutionUnit:
+def working_out_task_prompt(unit: EvolutionUnit, loader, **kwargs) -> EvolutionUnit:
     """A 'lamarckian' mutation operator similar to instruction induction in APE.
 
     As far as I can understand, give it both the Q and A from the gsm8k dataset,
@@ -125,7 +117,7 @@ def working_out_task_prompt(unit: EvolutionUnit, loader: ModelLoader, **kwargs) 
     Returns:
         EvolutionUnit: the evolution unit to replace the loser unit.
     """
-    RANDOM_WORKING_OUT = loader.get_sample()  # ! вот тут надо понять как вытянуть Q и A
+    RANDOM_WORKING_OUT = loader.get_sample()
 
     unit.P = (
         loader.generate(
@@ -134,7 +126,7 @@ def working_out_task_prompt(unit: EvolutionUnit, loader: ModelLoader, **kwargs) 
             + " "
             + RANDOM_WORKING_OUT["answer"]
             + " The instruction was: "
-        )
+        )[0]
         .outputs[0]
         .text
     )
@@ -173,7 +165,7 @@ MUTATORS = [
 POST_MUTATORS = [prompt_crossover, context_shuffling]
 
 
-def mutate(population: Population, loader: ModelLoader) -> Population:
+def mutate(population: Population, loader) -> Population:
     """Select and apply a random mutator"""
     # steps
     # 1. parse through the population, grouping each evo unit by 2
