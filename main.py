@@ -13,24 +13,21 @@ logging.basicConfig(format="%(asctime)s - %(levelname)s - %(message)s", level=lo
 logger = logging.getLogger(__name__)
 
 parser = argparse.ArgumentParser(description="Run the PromptBreeder Algorithm. Number of units is mp * ts.")
-parser.add_argument("-mp", "--num_mutation_prompts", type=int, default=2)
+parser.add_argument("-mp", "--num_mutation_prompts", type=int, default=3)
 parser.add_argument("-ts", "--num_thinking_styles", type=int, default=4)
 parser.add_argument("-e", "--num_evals", type=int, default=100)
 parser.add_argument("-n", "--simulations", type=int, default=10)
 parser.add_argument("--task-name", default="sst-2")
 parser.add_argument("--bench-name", default="")
-parser.add_argument("--batch-size", type=int, default=16)
+parser.add_argument("--batch-size", type=int, default=128)
 parser.add_argument("--meta-dir")
 parser.add_argument("--meta-name")
 parser.add_argument("--meta-dir-test", help="Directory for test results in JSON format")
+parser.add_argument("--eval-only", type=bool, default=False)
 
 args = parser.parse_args()
 
 logger.info(f"args: {args}")
-
-meta_path = os.path.join(args.meta_dir, args.meta_name)
-meta_file = open(meta_path, "w+")
-meta_test_path = open(args.meta_dir_test, "a")
 
 project_root = os.path.abspath(os.path.join(os.getcwd(), "../../../"))
 sys.path.append(project_root)
@@ -46,6 +43,42 @@ else:
     loader = ModelLoader(task_name=args.task_name, batch_size=args.batch_size)
 loader.seed_everything()
 logger.info("Model loaded")
+
+if args.eval_only:
+    output_dir = os.path.dirname(args.meta_dir_test)
+    output_file_path = os.path.join(output_dir, "metrics_full_test.txt")
+
+    with open(output_file_path, "a") as output_file:
+        with open(args.meta_dir_test, "r") as input_file:
+            for line in input_file:
+                try:
+                    data = json.loads(line.strip())
+                    task_name = data.get("task_name")
+                    prompt = data.get("prompt")
+
+                    loader.initialize_task(task_name)
+                    if prompt == "":
+                        prompt = loader.base_prompt
+                    logger.info(f"Starting scoring {task_name}, evaluator: {loader.evaluator}, prompt: {prompt}")
+                    score = loader.get_metrics(candidate=prompt, split="test", full=True)
+
+                    result = {"task_name": task_name, "score": score, "prompt": prompt}
+                    logger.info(result)
+                    output_file.write(json.dumps(result) + "\n")
+                    output_file.flush()
+                    logger.info(f"Processed prompt for task: {task_name}")
+                except json.JSONDecodeError:
+                    logger.error(f"Failed to parse line as JSON: {line}")
+                except Exception as e:
+                    logger.error(f"Error processing line: {str(e)}")
+
+    logger.info(f"Evaluation completed. Results written to {output_file_path}")
+    loader.destroy()
+    sys.exit(0)
+
+meta_path = os.path.join(args.meta_dir, args.meta_name)
+meta_file = open(meta_path, "w+")
+meta_test_path = open(args.meta_dir_test, "a")
 
 num_samples = 100
 total_evaluations = args.num_mutation_prompts * args.num_thinking_styles * num_samples

@@ -11,7 +11,7 @@ from transformers import AutoTokenizer
 from vllm import LLM, SamplingParams
 
 from src.evaluation.evaluator import GenerationEvaluator, TextClassificationEvaluator
-from src.utils.data import INNER_GENERATION_TASKS
+from src.utils.data import BBH_TASKS, INNER_GENERATION_TASKS, NATURAL_INSTRUCTIONS_TASKS
 from src.utils.load_dataset import load_dataset
 
 
@@ -73,30 +73,7 @@ class ModelLoader:
 
         print("Model eval completed")
 
-        if self.task_name in ["gsm8k", "math", "samsum"] or self.task_name in INNER_GENERATION_TASKS:
-            self._evaluator = GenerationEvaluator()
-            self._max_new_tokens = 100
-        else:
-            self._evaluator = TextClassificationEvaluator()
-            self._max_new_tokens = 50
-        print(f"Evaluator loaded: {self._evaluator}")
-
-        with open("../../../data/labels.json", "r") as f:
-            labels_json = json.load(f)
-            try:
-                if self.bench_name is not None:
-                    self._labels = labels_json[self.bench_name][self.task_name]
-                else:
-                    self._labels = labels_json[self.task_name]
-            except KeyError:
-                self._labels = []
-
-        with open("../../../data/basic_prompts.json", "r") as f:
-            prompts_json = json.load(f)
-            if self.bench_name is not None:
-                self._base_prompt = prompts_json[self.bench_name][self.task_name]
-            else:
-                self._base_prompt = prompts_json[self.task_name]
+        self.initialize_task(self.task_name)
 
         print("Model initializing completed")
         self.print_gpu_memory()
@@ -154,6 +131,40 @@ class ModelLoader:
         np.random.default_rng(seed)
         torch.manual_seed(seed)
         torch.cuda.manual_seed(seed)
+
+    def initialize_task(self, task_name: str):
+        self.task_name = task_name
+        if self.task_name in NATURAL_INSTRUCTIONS_TASKS:
+            self.bench_name = "natural_instructions"
+        elif self.task_name in BBH_TASKS:
+            self.bench_name = "bbh"
+        else:
+            self.bench_name = None
+        if self.task_name in ["gsm8k", "math", "samsum"] or self.task_name in INNER_GENERATION_TASKS:
+            self._evaluator = GenerationEvaluator()
+            self._max_new_tokens = 100
+        else:
+            self._evaluator = TextClassificationEvaluator()
+            self._max_new_tokens = 50
+        print(f"Evaluator loaded: {self._evaluator}")
+
+        with open("../../../data/labels.json", "r") as f:
+            labels_json = json.load(f)
+            try:
+                if self.bench_name is not None:
+                    self._labels = labels_json[self.bench_name][self.task_name]
+                else:
+                    self._labels = labels_json[self.task_name]
+            except KeyError:
+                self._labels = []
+
+        with open("../../../data/basic_prompts.json", "r") as f:
+            prompts_json = json.load(f)
+            if self.bench_name is not None:
+                self._base_prompt = prompts_json[self.bench_name][self.task_name]
+            else:
+                self._base_prompt = prompts_json[self.task_name]
+        print(f"task {self.task_name} initialized")
 
     def print_gpu_memory(self):
         if not torch.cuda.is_available():

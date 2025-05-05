@@ -26,7 +26,7 @@ for TASK in "${TASKS_NAT_INSTR[@]}"; do
         --task-name $TASK \
         --meta-dir $META_DIR \
         --meta-name $META_NAME \
-        --meta-dir-test $META_DIR_TEST \ 
+        --meta-dir-test $META_DIR_TEST \
         --bench-name "natural_instructions"
     echo "finished task $TASK"
 done
@@ -40,7 +40,7 @@ for TASK in "${TASKS_BBH[@]}"; do
         --task-name $TASK \
         --meta-dir $META_DIR \
         --meta-name $META_NAME \
-        --meta-dir-test $META_DIR_TEST \ 
+        --meta-dir-test $META_DIR_TEST \
         --bench-name "bbh"
     echo "finished task $TASK"
 done
