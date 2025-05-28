@@ -1,0 +1,7 @@
+initital prompt: Recommend movies similar to the given list of movies.
+the fittest:
+--------------------------------------------------------------------------------
+fitness: 0.894000719040115
+prompt: 
+9.  Create a list of movies similar to the given list of movies, and then evaluate each movie for its cultural impact and box office performance, and also provide a brief summary of each movie. INSTRUCTION MUTANT = 5: Create
+--------------------------------------------------------------------------------

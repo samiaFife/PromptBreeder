@@ -33,9 +33,12 @@ project_root = os.path.abspath(os.path.join(os.getcwd(), "../../../"))
 sys.path.append(project_root)
 
 from pb.utils.model_loader import ModelLoader  # noqa 402
+logger.info("ModelLoader imported")
 from pb.mutation_prompts import mutation_prompts  # noqa 402
 from pb.thinking_styles import thinking_styles  # noqa 402
 from pb import create_population, init_run, run_for_n  # noqa 402
+
+logger.info("Imports executed")
 
 if args.bench_name != "":
     loader = ModelLoader(task_name=args.task_name, bench_name=args.bench_name, batch_size=args.batch_size)
@@ -46,14 +49,14 @@ logger.info("Model loaded")
 
 if args.eval_only:
     output_dir = os.path.dirname(args.meta_dir_test)
-    output_file_path = os.path.join(output_dir, "metrics_full_test.txt")
+    output_file_path = os.path.join(output_dir, "plum_metrics_full.txt")
 
     with open(output_file_path, "a") as output_file:
         with open(args.meta_dir_test, "r") as input_file:
             for line in input_file:
                 try:
                     data = json.loads(line.strip())
-                    task_name = data.get("task_name")
+                    task_name = data.get("task")
                     prompt = data.get("prompt")
 
                     loader.initialize_task(task_name)

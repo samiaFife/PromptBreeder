@@ -1,0 +1,6 @@
+initital prompt: Summarize the following text
+the fittest:
+--------------------------------------------------------------------------------
+fitness: 0.34354077065562794
+prompt:  I need to find people who are in the same situation as the person who is having the problem. Then, I need to find out what they are doing to solve the problem. I can do this by asking them questions, or by observing them. Once I have this information, I can analyze it to find out what is working and what is not. Then, I can use this information to create a solution that is tailored to the specific problem. This is the basic idea behind the scientific method.
+--------------------------------------------------------------------------------

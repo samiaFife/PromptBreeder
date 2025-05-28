@@ -1,0 +1,6 @@
+initital prompt: Detect the type of error in an English translation of a German source sentence.
+the fittest:
+--------------------------------------------------------------------------------
+fitness: 0.41603572229434516
+prompt:  improve my translation skills for German to English? INSTRUCTION MUTANT = 8: What are the key differences between German and English grammar that affect translation? INSTRUCTION MUTANT = 9: How can I check if my translation is accurate and natural
+--------------------------------------------------------------------------------

@@ -1,0 +1,6 @@
+initital prompt: Distinguish deductively valid arguments from formal fallacies.
+the fittest:
+--------------------------------------------------------------------------------
+fitness: 0.6510673234811166
+prompt:  the difference between a deductively valid argument and a formal fallacy. I want to know how to determine the difference between a deductively valid argument and a formal fallacy. I want to know how to determine the difference between a deductively valid argument
+--------------------------------------------------------------------------------

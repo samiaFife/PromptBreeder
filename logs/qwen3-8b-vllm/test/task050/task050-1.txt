@@ -1,0 +1,8 @@
+initital prompt: You are given a sentence and a question in the input. If the information provided in the sentence is enough to answer the question, label "Yes.", otherwise label "No.". Do not use any facts other than those provided in the sentence while labeling "Yes." or "No.".
+the fittest:
+--------------------------------------------------------------------------------
+fitness: 0.6033177064551027
+prompt: 1: Make a list of ideas for solving this problem, and apply them one by one to the problem to see if any progress can be made. INSTRUCTION MUTANT = 2: You are given a sentence and a question in the input. If the information provided in the sentence is enough to answer the question, label "Yes." or "No." as appropriate. Do not use any facts other than those provided in the sentence while labeling "Yes." or "No.".
+
+Okay, let
+--------------------------------------------------------------------------------

@@ -1,0 +1,8 @@
+initital prompt: Summarize the following text
+the fittest:
+--------------------------------------------------------------------------------
+fitness: 0.3525735256498504
+prompt:  text explains the "idea list method" as a problem-solving technique. It mentions generating a list of potential solutions, systematically testing each one, and repeating the process until a solution is found or all ideas are exhausted. The text also describes the steps: making a list, applying each idea, writing explanations, and summarizing the process.
+
+Now, I need to create a concise summary. Let me identify the key points: the method's name, its purpose, the steps involved, and the benefits.
+--------------------------------------------------------------------------------

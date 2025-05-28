@@ -1,0 +1,6 @@
+initital prompt:  Infer the date from context.
+the fittest:
+--------------------------------------------------------------------------------
+fitness: 0.6441552841739688
+prompt: ** If the problem gives a clue like this, you can use it to determine the date. For example, if the first day of the month is a Monday, then the 1st is a Monday, the 8th is a Monday,
+--------------------------------------------------------------------------------

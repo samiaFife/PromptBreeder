@@ -1,0 +1,6 @@
+initital prompt: Evaluate the truth value of a random Boolean function expressed as a natural-language word problem.
+the fittest:
+--------------------------------------------------------------------------------
+fitness: 0.44581280788177335
+prompt:  simplifying the logic.  I have a problem where I need to find the number of ways to arrange the letters in the word "MUTANT". The word has 6 distinct letters. So, the total number of arrangements is 6!
+--------------------------------------------------------------------------------

@@ -1,0 +1,6 @@
+initital prompt: Answer extremely simple questions about the colors of objects on a surface.
+the fittest:
+--------------------------------------------------------------------------------
+fitness: 0.6355059307673687
+prompt:  the same.  The advice is not the same as the original instructions.  The original instructions first remove the gold objects and then count the notebooks.  The advice first counts the notebooks that are not gold and then removes the gold objects.  The
+--------------------------------------------------------------------------------

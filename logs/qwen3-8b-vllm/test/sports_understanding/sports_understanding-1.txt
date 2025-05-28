@@ -1,0 +1,6 @@
+initital prompt: Determine whether an artificially constructed sentence relating to sports is plausible or not.
+the fittest:
+--------------------------------------------------------------------------------
+fitness: 0.7699769976997699
+prompt: 1. Create a list of ideas for solving this problem, and apply them one by one to the problem to see if any progress can be made. 2. For each idea, write a brief explanation of how it could be used to solve the problem. 3. Then, apply each idea to the specific problem of determining the plausibility of an artificially constructed sentence about sports. 4. Try to come up with at least one idea that is not commonly used. 5. Try
+--------------------------------------------------------------------------------

@@ -1,0 +1,6 @@
+initital prompt: Determine which of two sentences is sarcastic.
+the fittest:
+--------------------------------------------------------------------------------
+fitness: 0.5772946859903382
+prompt:  "Try to find a pattern or a formula that can be applied to the result of the operations." So, the problem is to find the result of the operations, and the advice is to find a pattern or formula. So, the problem is to
+--------------------------------------------------------------------------------

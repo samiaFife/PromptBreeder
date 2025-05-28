@@ -1,0 +1,6 @@
+initital prompt: Answer questions about which times certain events could have occurred.
+the fittest:
+--------------------------------------------------------------------------------
+fitness: 0.8783584722277449
+prompt: -eighth event is the twenty-eighth event. The twenty-ninth event is the twenty-ninth event. The thirtieth event is the thirtieth event. The thirty-first event is the thirty-first event. The thirty-second event
+--------------------------------------------------------------------------------

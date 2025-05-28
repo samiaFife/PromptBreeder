@@ -1,0 +1,9 @@
+initital prompt: Select the humorous edit that 'ruins' the input movie or musical artist name.
+the fittest:
+--------------------------------------------------------------------------------
+fitness: 0.7612129529231048
+prompt: 
+9. 
+7. 
+4. 1. Select the edit that will ruin the input movie or musical artist name, but with the added condition that the edit must be a pun or play on words. 2. Select the edit that
+--------------------------------------------------------------------------------

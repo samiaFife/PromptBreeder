@@ -1,0 +1,10 @@
+initital prompt: Please use your domain knowledge in medical area to solve the questions.
+the fittest:
+--------------------------------------------------------------------------------
+fitness: 0.47988888888888886
+prompt: in. He has no known history of cardiovascular disease, but his family history includes a father who had a heart attack at age 55. He is a 45-year-old male, non-smoker, with a BMI of 28
+--------------------------------------------------------------------------------
+fitness: 0.47988888888888886
+prompt: 
+10. in. He has no known history of cardiovascular disease, but his family history includes a father who had a heart attack at age 55. He is a 45-year-old male, non-smoker, with a BMI
+--------------------------------------------------------------------------------

@@ -1,0 +1,6 @@
+initital prompt: A task requiring determining the final positions of a set of objects given their initial positions and a description of a sequence of swaps.
+the fittest:
+--------------------------------------------------------------------------------
+fitness: 0.3636338091491514
+prompt: 1: How can I track the movement of each object during the swap sequence? INSTRUCTION MUTANT = 2: What's the most efficient way to keep track of where each object ends up after all the swaps? INSTRUCTION MUTANT = 3: How might I represent the swaps to make it easier to compute the final positions? INSTRUCTION MUTANT = 4: Can I use a system that automatically updates the positions as swaps happen? INSTRUCTION MUTANT = 5: How can
+--------------------------------------------------------------------------------

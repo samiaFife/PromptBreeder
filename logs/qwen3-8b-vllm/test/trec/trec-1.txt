@@ -1,0 +1,6 @@
+initital prompt: Classify this sentence based on the provided categories.
+the fittest:
+--------------------------------------------------------------------------------
+fitness: 0.23324525932052811
+prompt: 1: How can I simplify the task into smaller, manageable steps so that I can solve it more effectively? INSTRUCTION MUTANT = 2: What categories are available for classification, and how can I determine which category fits the sentence best? INSTRUCTION MUTANT = 3: Can I break down the sentence into its key components and analyze each one to see which category it belongs to? INSTRUCTION MUTANT = 4: What strategies can I use to identify the most relevant category for this
+--------------------------------------------------------------------------------

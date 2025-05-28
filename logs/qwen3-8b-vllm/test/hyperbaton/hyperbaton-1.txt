@@ -1,0 +1,6 @@
+initital prompt: Order adjectives correctly in English sentences.
+the fittest:
+--------------------------------------------------------------------------------
+fitness: 0.9095568284594513
+prompt:  not cooked, cook for another 10 minutes. 6. If it's still not cooked, cook for another 10 minutes. 7. If it's still not cooked, cook for another 10 minutes. 8.
+--------------------------------------------------------------------------------

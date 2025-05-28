@@ -1,0 +1,7 @@
+initital prompt: Identify the most suitable category for this question.
+the fittest:
+--------------------------------------------------------------------------------
+fitness: 0.45891871286608127
+prompt:  
+10.  categories. For example, if the question is about a car, the most suitable category is "vehicles", and then you would create questions about other vehicles, such as "What is the fastest car?" and "What is the
+--------------------------------------------------------------------------------

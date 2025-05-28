@@ -1,0 +1,9 @@
+initital prompt: Solve the math word problem
+the fittest:
+--------------------------------------------------------------------------------
+fitness: 0.05561182285197857
+prompt:  100
+10.  Consider if there are alternative methods to solve the problem. INSTRUCTION MUTANT = 8: Verify the answer with a different approach. INSTRUCTION MUTANT = 9: Think about the implications of the answer. INSTRUCTION MUTANT = 10: Conclude the solution.
+
+Alright, let me start by breaking down the problem. The farmer wants to enclose a rectangular area with fencing and then divide it into two equal parts with another fence.
+--------------------------------------------------------------------------------

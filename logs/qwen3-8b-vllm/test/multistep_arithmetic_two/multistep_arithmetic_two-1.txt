@@ -1,0 +1,7 @@
+initital prompt: Solve multi-step arithmetic problems.
+the fittest:
+--------------------------------------------------------------------------------
+fitness: 0.024278528763549564
+prompt: 
+9. 1) - 5. 5. Divide by 2: [3(x + 1) - 5]/2. 6. Subtract the original number: [3(x + 1) - 5]/2 - x. 7. Simplify the expression. 8. The result is a constant, so the answer is 1. 9. The answer is 1. 10. The answer is 1. 11
+--------------------------------------------------------------------------------

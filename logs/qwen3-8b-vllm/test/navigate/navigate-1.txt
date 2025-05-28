@@ -1,0 +1,8 @@
+initital prompt: Given a series of navigation instructions, determine whether one would end up back at the starting point.
+the fittest:
+--------------------------------------------------------------------------------
+fitness: 0.7348021215830274
+prompt:  "How can I simplify the problem so that it is easier to solve?" → "How can I simplify the problem so that it is easier to solve? (Think of it as a treasure hunt!)" 
+
+Okay, so I need to figure out if following a series of navigation instructions brings me back to the starting point. Let me start by thinking about what each instruction does. Each instruction probably moves me in a certain direction or changes my position in some way. If I can track my position after
+--------------------------------------------------------------------------------

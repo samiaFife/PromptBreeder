@@ -1,0 +1,13 @@
+initital prompt: Clarify the meaning of sentences with ambiguous pronouns.
+the fittest:
+--------------------------------------------------------------------------------
+fitness: 0.3556050656660413
+prompt: 
+11. 
+9.  that my solution is correct and efficient? 10. What are the common pitfalls to avoid when solving problems involving multiple steps? 11. How can I use diagrams or visual aids to better understand a
+--------------------------------------------------------------------------------
+fitness: 0.3556050656660413
+prompt: 
+11. 
+9.  that my solution is correct and efficient? 10. What are the common pitfalls to avoid when solving problems involving multiple steps? 11. How can I use diagrams or visual aids to better understand a
+--------------------------------------------------------------------------------

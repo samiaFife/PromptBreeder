@@ -1,0 +1,6 @@
+initital prompt: Evaluate the result of a random Boolean expression.
+the fittest:
+--------------------------------------------------------------------------------
+fitness: 0.9197109594540345
+prompt:  Boolean expression. The user wants to simplify the problem in three different ways, each time making it easier for an LLM to solve. But the goal here is to create a version that's so easy that even a self-respecting LLM would avoid
+--------------------------------------------------------------------------------

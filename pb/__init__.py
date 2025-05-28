@@ -4,7 +4,6 @@ from typing import List
 
 from vllm import SamplingParams
 
-from pb import gsm
 from pb.utils.model_loader import ModelLoader
 from pb.mutation_operators import mutate
 from pb.types import EvolutionUnit, Population
@@ -12,7 +11,7 @@ from rich import print
 
 logger = logging.getLogger(__name__)
 
-gsm8k_examples = gsm.read_jsonl("pb/data/gsm.jsonl")
+# gsm8k_examples = gsm.read_jsonl("pb/data/gsm.jsonl")
 
 
 def create_population(tp_set: List, mutator_set: List, problem_description: str) -> Population:

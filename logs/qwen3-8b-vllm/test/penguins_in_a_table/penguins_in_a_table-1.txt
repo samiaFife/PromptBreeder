@@ -1,0 +1,21 @@
+initital prompt: Answer questions about a table of penguins and their attributes.
+the fittest:
+--------------------------------------------------------------------------------
+fitness: 0.5544704161537192
+prompt: The penguin with the highest weight is the one with the highest weight.
+--------------------------------------------------------------------------------
+fitness: 0.5544704161537192
+prompt: The penguin with the highest weight is the one with the highest weight.
+--------------------------------------------------------------------------------
+fitness: 0.5544704161537192
+prompt: The penguin with the highest weight is the one with the highest weight.
+--------------------------------------------------------------------------------
+fitness: 0.5544704161537192
+prompt: The penguin with the highest weight is the one with the highest weight.
+--------------------------------------------------------------------------------
+fitness: 0.5544704161537192
+prompt: The penguin with the highest weight is the one with the highest weight.
+--------------------------------------------------------------------------------
+fitness: 0.5544704161537192
+prompt: The penguin with the highest weight is the one with the highest weight.
+--------------------------------------------------------------------------------

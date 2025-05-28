@@ -1,0 +1,7 @@
+initital prompt: A task requiring determining the final positions of a set of objects given their initial positions and a description of a sequence of swaps.
+the fittest:
+--------------------------------------------------------------------------------
+fitness: 0.21784054759479393
+prompt: 
+7.  positions and a description of a sequence of swaps. INSTRUCTION MUTANT = 4: A task requiring determining the final positions of a set of objects given their initial positions and a description of a sequence of swaps. INSTRUCTION MUT
+--------------------------------------------------------------------------------
