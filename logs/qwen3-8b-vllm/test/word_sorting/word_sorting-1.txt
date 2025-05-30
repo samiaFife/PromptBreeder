@@ -1,7 +1,0 @@
-initital prompt: Sort a list of words.
-the fittest:
---------------------------------------------------------------------------------
-fitness: 0.29062487779376217
-prompt: 
-7.  The second word is "banana". The third word is "cherry". The fourth word is "date". The fifth word is "elderberry". The sixth word is "fig". The seventh word is "grape". The eighth word is "honeydew". The ninth word is "kiwi". The tenth word is "lemon". The eleventh word is "mango". The twelfth word is "nectarine". The thirteenth word is "
---------------------------------------------------------------------------------

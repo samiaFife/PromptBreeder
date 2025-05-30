@@ -1,8 +1,0 @@
-initital prompt: Define if the sentence entails the question.
-the fittest:
---------------------------------------------------------------------------------
-fitness: 0.9088976617066504
-prompt: 1: How can I tell if the sentence supports the question? INSTRUCTION MUTANT = 2: How can I know if the question is covered by the sentence? INSTRUCTION MUTANT = 3: How can I determine if the sentence includes the question's meaning?
-
-Okay, let's see. The original instruction is to define if the sentence entails the question. The user wants me to make this more fun and think outside the box. They provided three instruction mutants, but I need to come
---------------------------------------------------------------------------------

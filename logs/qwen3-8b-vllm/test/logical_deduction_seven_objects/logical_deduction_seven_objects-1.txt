@@ -1,6 +1,0 @@
-initital prompt: A logical deduction task which requires deducing the order of a sequence of objects.
-the fittest:
---------------------------------------------------------------------------------
-fitness: 0.6832084717945149
-prompt: 1. Make a list of ideas for solving this problem, and apply them one by one to the problem to see if any progress can be made. 2. Ensure that the instructions are not directly copied from the original. 3. Ensure that the instructions are not in the same order as the original. 4. Ensure that the instructions are not in the same wording as the original. 5. Ensure that the instructions do not mention anything about the problem's nature or the task. 
---------------------------------------------------------------------------------

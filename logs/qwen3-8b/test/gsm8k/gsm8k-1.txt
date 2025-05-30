@@ -1,7 +1,0 @@
-initital prompt: Solve the math word problem, giving your answer as an arabic numeral.
-the fittest:
---------------------------------------------------------------------------------
-fitness: 0.03025668820575953
-prompt:  a single equation.
-10.  "You are given a word problem. You are to write a solution to the problem. Your solution must be in the form of a mathematical expression. You are to write the expression in the form of a single equation. You are to write the expression in the form of a single equation. You are to write the expression in the form of a single equation. You are to write the expression in the form of a single equation. You are to write the expression
---------------------------------------------------------------------------------

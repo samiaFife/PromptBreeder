@@ -1,6 +1,0 @@
-initital prompt: Questions that involve enumerating objects and asking the model to count them.
-the fittest:
---------------------------------------------------------------------------------
-fitness: 0.032108399314943005
-prompt: 1: How can I simplify the problem so that it is easier to solve? INSTRUCTION MUTANT = 2: What is the simplest way to approach this problem? INSTRUCTION MUTANT = 3: What are the steps to simplify this problem? INSTRUCTION MUTANT = 4: What is the easiest way to solve this problem? INSTRUCTION MUTANT = 5: How can I break down this problem into smaller steps? INSTRUCTION MUTANT = 6: What is the most
---------------------------------------------------------------------------------

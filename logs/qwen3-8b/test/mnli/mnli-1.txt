@@ -1,8 +1,0 @@
-initital prompt: In this task, you're given a pair of sentences, premise and hypothesis. Your job is to choose whether the two sentences clearly agree/disagree with each other, or if this cannot be determined.
-the fittest:
---------------------------------------------------------------------------------
-fitness: 0.8158739941790789
-prompt:  "How can I simplify the problem so that it is easier to solve?" → "How can I turn this into a fun game where I can play with my friends and learn something cool at the same time?" So the new instruction is something like "How can I turn this into a fun game where I can play with my friends and learn something cool at the same time?".
-
-Okay, let's try to figure out how to make this task more fun. The original instruction is about determining if two
---------------------------------------------------------------------------------

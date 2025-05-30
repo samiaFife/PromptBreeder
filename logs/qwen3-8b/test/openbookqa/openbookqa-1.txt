@@ -1,6 +1,0 @@
-initital prompt: Answer the following question: 
-the fittest:
---------------------------------------------------------------------------------
-fitness: 0.5786111111111111
-prompt: 1. First, write a short paragraph that describes the problem you are trying to solve (2-3 sentences). 2. Then, design an experiment that could help solve it. 3. Finally, write a short paragraph providing possible outcomes and their implications.  Here's an example of what a good response might look like:  First, I want to solve the problem of [insert problem here]. [insert reasoning] This is important because [insert importance]. For the experiment, I would
---------------------------------------------------------------------------------

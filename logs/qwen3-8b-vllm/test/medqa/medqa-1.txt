@@ -1,6 +1,0 @@
-initital prompt: Please use your domain knowledge in medical area to solve the questions.
-the fittest:
---------------------------------------------------------------------------------
-fitness: 0.44001032091598125
-prompt: 1. Make a list of ideas for solving this problem, and apply them one by one to the problem to see if any progress can be made. 2. Make the list of ideas as creative as possible, with at least 10 ideas, and each idea should be a different approach to the problem. 3. For each idea, imagine what would happen if it was implemented, and write a short paragraph for each. 4. For each idea, write down what are the pros
---------------------------------------------------------------------------------
